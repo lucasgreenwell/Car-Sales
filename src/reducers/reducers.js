@@ -1,6 +1,8 @@
-import { createStore } from "redux"; 
+// import { createStore } from "redux"; 
  
-export  const state = {
+
+ import {ADD_FEATURE, REMOVE_FEATURE} from "./actionCreators"
+ const initialState = {
     additionalPrice: 0,
     car: {
       price: 26395,
@@ -17,7 +19,23 @@ export  const state = {
     ]
   };
 
- export function reducer(state, action) {
-    return state;
+ export function reducer(state = initialState, action) {
+     switch(action.type){
+         case 'ADD_FEATURE':
+         {
+            if(state.car.features.includes(action.payload)===false){
+                return {
+                    ...state,
+                    car: {
+                      ...state.car, 
+                      features: [...state.car.features, action.payload]
+                    }
+                  }
+            }
+            break;
+         }
+         default: 
+         return state
+     }
   }
 
